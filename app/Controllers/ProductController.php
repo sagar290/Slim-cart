@@ -10,9 +10,8 @@ use Cart\Models\Product;
 class ProductController 
 {
 
-	public function __construct() {
+	
 
-	}
 	public function get($slug, Request $request, Response $response,Twig $view, Product $product, Router $router)
 	{
 		$product = $product->where('slug', $slug )->first(); //null

@@ -10,19 +10,19 @@
 	</div>	
 	<div class="col-md-8">
 
-		{% if product.hasLowStock %}
+		{% if product.hasLowStock() %}
 			<span class="label label-warning">Low stock</span>
 		{% endif %}
 
-		{% if product.outOfStock %}
+		{% if product.outOfStock() %}
 			<span class="label label-danger">Out of stock</span>
 		{% endif %}
 
 		<h3>{{ product.title }}</h3>
 		<p>{{ product.description }}</p>
 
-		{% if product.inStock %}
-			<a href="" class="btn btn-default btn-sm"> Add To Cart</a>
+		{% if product.inStock() %}
+			<a href="{{ path_for('cart.add', {slug: product.slug, quantity: 1  }) }}" class="btn btn-default btn-sm"> Add To Cart</a>
 		{% endif %}
 
 		{# <a href="" class="btn btn-default btn-sm"> Add To Cart</a> #}

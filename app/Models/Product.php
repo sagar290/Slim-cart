@@ -15,7 +15,11 @@ class Product extends Model
 			return false;
 		}
 
-		return (bool) ($this->stock <= 5);
+
+		if ($this->stock <= 5) {
+			return true;
+		}
+		// return (bool) ($this->stock <= 5);
 	}
 
 	public function outOfStock() 
