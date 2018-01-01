@@ -1,28 +1,31 @@
-<?php 
+<?php
+
 namespace Cart\Controllers;
 
 use Slim\Router;
 use Slim\Views\Twig;
+use Cart\Models\Product;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Cart\Models\Product;
 
-class ProductController 
-{
+class ProductController{
 
-	
+	protected $view;
 
-	public function get($slug, Request $request, Response $response,Twig $view, Product $product, Router $router)
-	{
-		$product = $product->where('slug', $slug )->first(); //null
+	public function __construct(Twig $view){
+		$this->view = $view;
+	}
+
+	public function get($slug, Request $request, Response $response, Twig $view, Router $router, Product $product){
+		$product = $product->where('slug', $slug)->first();
 
 		if (!$product) {
 			return $response->withRedirect($router->pathFor('home'));
 		}
 
-		return $view->render($response, 'products/product.twig', [
-
+		return $this->view->render($response, 'products/product.twig', [
 			'product' => $product
 		]);
 	}
+
 }
